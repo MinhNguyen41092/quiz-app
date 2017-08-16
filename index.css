@@ -1,0 +1,22 @@
+.quiz {
+  text-align: center;
+}
+
+input {
+  margin-top: 10px;
+}
+
+h4 {
+  display: inline-block;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+
+.submit {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.result {
+  color: green;
+}

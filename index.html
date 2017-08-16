@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz The App</title>
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="quiz">
+    <form>
+      <h3 class="title"></h3>
+      <h5 class="result"></h4>
+      <h5 class="wrong"></h4>
+      <input type="radio"><h4 class="options"></h4></input><br>
+      <input type="radio"><h4 class="options"></h4></input><br>
+      <input type="radio"><h4 class="options"></h4></input><br>
+      <input type="radio"><h4 class="options"></h4></input>
+    </form>
+  </div>
+  <div class="submit"><button>Submit your answer</button></div>
+  <div class="result"></div>
+<script>
+  const questions = [
+    {
+      title: "What is the true name of Saber?",
+      option1: "Tousaka Rin",
+      option2: "Arturia Pendragon",
+      option3: "Matou Sakura",
+      option4: "All above are wrong",
+      result: "Arturia Pendragon"
+    },
+    {
+      title: "Who is the best waifu?",
+      option1: "Kanbaru Suruga",
+      option2: "Oumae Kumiko",
+      option3: "Senjougahara Hitagi",
+      option4: "Hanekawa Tsubasa",
+      result: "Senjougahara Hitagi"
+    },
+    {
+      title: "How do you write Javascript?",
+      option1: "By blind luck",
+      option2: "By reading book",
+      option3: "Stackoverflow",
+      option4: "I use Ruby mate",
+      result: "By reading book"
+    }
+  ];
+
+  function buildQuestions() {
+    const title = document.querySelector('.title');
+    const options = document.getElementsByTagName('h4');
+    const currentQuestion = questions.filter((question) => {
+      if(question.title == title.textContent) return question;
+    });
+    var newQuestion = {};
+    if(currentQuestion) {
+      index = questions.indexOf(currentQuestion);
+      newQuestion = questions[index + 1];
+    } else {
+      newQuestion = questionsp[0];
+    }
+    title.textContent = newQuestion.title;
+    for(i = 0; i < options.length; i++) {
+      options[i].textContent = newQuestion[`option${i+1}`];
+    }
+    const submit = document.querySelector('.submit');
+    submit.addEventListener('click', displayResult);
+  }
+
+  function displayResult() {
+    var inputs = document.getElementsByTagName('input');
+    inputs = Array.from(inputs);
+    const answer = inputs.filter((input) => {
+      if(input.checked) return input;
+    })[0].nextElementSibling.textContent;
+    const currentQuestion = questions.filter((question) => {
+      for(i = 1; i <= 4; i++) {
+        if(question[`option${i}`] == answer) return question;
+      }
+    })[0];
+    const result = document.querySelector('.result');
+    const wrong = document.querySelector('.wrong');
+    if(answer == currentQuestion.result) {
+      result.textContent = answer;
+    } else {
+      wrong.textContent = "Too bad try again normie";
+    }
+  }
+
+  buildQuestions();
+</script>
+</body>
+</html>
